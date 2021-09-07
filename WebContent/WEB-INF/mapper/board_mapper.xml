@@ -11,4 +11,23 @@
 			#{content_writer_idx}, #{content_board_idx}, sysdate())
 		]]>
 	</insert>
+	
+	<select id="getBoardInfoName" parameterType="java.lang.Integer" resultType="java.lang.String">
+		<![CDATA[
+			SELECT board_info_name 
+				FROM board_info_table 
+				WHERE board_info_idx=#{board_info_idx}
+		]]>
+	</select>
+
+				
+	<select id="getContentList" parameterType="java.lang.Integer" resultType="kr.co.softcampus.beans.ContentBean">
+		<![CDATA[
+			SELECT a1.content_idx, a1.content_subject, a2.user_name content_writer_name,
+					date_format(a1.content_date,'%Y-%m-%d') content_date 
+				FROM content_table a1, user_table a2 
+				WHERE a1.content_writer_idx=a2.user_idx AND a1.content_board_idx=#{board_info_idx} 
+				ORDER BY a1.content_idx DESC
+		]]>
+	</select>
 </mapper>
