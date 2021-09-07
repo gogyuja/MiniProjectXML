@@ -10,6 +10,9 @@
 			values(#{content_subject}, #{content_text}, #{content_file},
 			#{content_writer_idx}, #{content_board_idx}, sysdate())
 		]]>
+		<selectKey keyProperty="content_idx" order="AFTER" resultType="java.lang.Integer">
+			    SELECT LAST_INSERT_ID()
+		</selectKey>
 	</insert>
 	
 	<select id="getBoardInfoName" parameterType="java.lang.Integer" resultType="java.lang.String">
@@ -30,4 +33,14 @@
 				ORDER BY a1.content_idx DESC
 		]]>
 	</select>
+	
+	<select id="getContentInfo" parameterType="java.lang.Integer" resultType="kr.co.softcampus.beans.ContentBean">
+		<![CDATA[
+			SELECT a2.user_name content_writer_name, 
+				date_format(a1.content_date,'%Y-%m-%d') content_date, 
+				a1.content_subject, a1.content_text, a1.content_file 
+				FROM content_table a1, user_table a2 
+					WHERE a1.content_writer_idx=a2.user_idx AND content_idx=#{content_idx}
+		]]>
+	</select>		
 </mapper>
