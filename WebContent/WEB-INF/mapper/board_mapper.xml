@@ -38,7 +38,7 @@
 		<![CDATA[
 			SELECT a2.user_name content_writer_name, 
 				date_format(a1.content_date,'%Y-%m-%d') content_date, 
-				a1.content_subject, a1.content_text, a1.content_file 
+				a1.content_subject, a1.content_text, a1.content_file, a1.content_writer_idx 
 				FROM content_table a1, user_table a2 
 					WHERE a1.content_writer_idx=a2.user_idx AND content_idx=#{content_idx}
 		]]>
