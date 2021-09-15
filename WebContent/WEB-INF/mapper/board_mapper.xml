@@ -42,5 +42,15 @@
 				FROM content_table a1, user_table a2 
 					WHERE a1.content_writer_idx=a2.user_idx AND content_idx=#{content_idx}
 		]]>
-	</select>		
+	</select>
+	
+	
+	<update id="modifyContentInfo" parameterType="kr.co.softcampus.beans.ContentBean">
+		<![CDATA[
+		update content_table
+				set content_subject = #{content_subject}, content_text=#{content_text}, 
+				content_file=#{content_file}
+				where content_idx=#{content_idx}
+		]]>
+	</update>
 </mapper>
