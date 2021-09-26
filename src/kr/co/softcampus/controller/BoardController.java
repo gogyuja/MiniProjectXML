@@ -70,14 +70,25 @@ public class BoardController {
 	
 	
 	@GetMapping("/write")
-	public String write(@ModelAttribute("writeContentBean")ContentBean writeContentBean, @RequestParam("board_info_idx")int board_info_idx) {
+	public String write(@ModelAttribute("writeContentBean")ContentBean writeContentBean
+			,@RequestParam("page")int page
+			,@RequestParam("board_info_idx")int board_info_idx
+			,Model model) {
+		
+		model.addAttribute("page", page);
 		
 		writeContentBean.setContent_board_idx(board_info_idx);
 		return "board/write";
 	}
 	
 	@PostMapping("/write_pro")
-	public String write_pro(@Valid @ModelAttribute("writeContentBean") ContentBean writeContentBean,BindingResult result) {
+	public String write_pro(@Valid @ModelAttribute("writeContentBean") ContentBean writeContentBean
+			,@RequestParam("page")int page
+			,BindingResult result
+			,Model model) {
+		
+		model.addAttribute("page",page);
+		
 		if(result.hasErrors()) {
 			return "board/write";
 		}

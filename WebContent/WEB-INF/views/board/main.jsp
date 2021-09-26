@@ -93,7 +93,8 @@
 			</div>
 			
 			<div class="text-right">
-				<a href="${root }board/write?board_info_idx=${board_info_idx}" class="btn btn-primary">글쓰기</a>
+				<!-- 글을 쓰면 그 글은 무조건 최신이니까 page=1 -->
+				<a href="${root }board/write?board_info_idx=${board_info_idx}&page=1" class="btn btn-primary">글쓰기</a>
 			</div>
 			
 		</div>
